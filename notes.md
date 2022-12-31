@@ -31,3 +31,9 @@ No upfrontcost
 PASS
 SAAS
 IAAC
+
+Install RDS
+Install Amazon MQ
+Install Elasticache-Memcached
+COnfigure Elasticbeanstalk
+configure Cloudfront.
