@@ -1,39 +1,40 @@
-ISSUES WITH THE INITIAL CLOUD DEPLOYMENT
-...........................
+Project Steps
+..........................
+Install Ubuntu 20 server
+Install Jenkins application
+Install Oracle JDK 
+--configure oracle jdk in jenkins.
+--point to path in JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
 
-Operational Overhead
-truggling with Uptime and Scaling
-Upfront Capex and Regular Opex
-Manual process/Difficult to Automate.
+Configure maven for deploy.
 
-Solution.....
-Using IAAC, PAAS and SAAS
-flexibiity
-Ease of infs=astructure
-Automation
-Convinent to scale
+Install plugins for pipeline integration for maven
+--------------------------------
 
-Beanstalk (VM for Tomcat)
-Load balancer
-Automation for vm scaling
-S3 storage
+Pipeline utility steps
+pipeline maven integration
 
-Backend.
-RDS Instance (Database)
-Elastic Cache (Memcached)
-ActiveMq (RabbitMq)
-Route53 (DNS)
-Cloudfront (Content Delivery Network)
+Jenkins Script
+````
+pipeline {
+    agent any
+    stages {
+        stage('Fetch code'){
+            steps {
+                git branch: 'paac', url: 'https://github.com/yemveiser/vprofile-project.git'
+            }
+        }
+        stage('Build'){
+            steps {
+                sh 'mvn install'
+            }
+        }
+        stage(Test){
+            steps {
+                sh 'mvn test'
+            }
 
-Objective.
-Flexible Infra
-No upfrontcost
-PASS
-SAAS
-IAAC
-
-Install RDS
-Install Amazon MQ
-Install Elasticache-Memcached
-COnfigure Elasticbeanstalk
-configure Cloudfront.
+        }
+    }
+}
+````
